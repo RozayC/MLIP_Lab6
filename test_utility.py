@@ -38,4 +38,15 @@ def feature_target_sample(housing_data_sample):
 def test_data_split(feature_target_sample):
     return_tuple = data_split(*feature_target_sample)
     # TODO test if the length of return_tuple is 4
-    raise NotImplemented
+    assert len(return_tuple) == 4, "Expected 4 elements in the return tuple (X_train, X_test, y_train, y_test)"
+
+    X_train, X_test, y_train, y_test = return_tuple
+
+    total_samples = len(feature_target_sample[0]) 
+
+    assert len(X_train) + len(X_test) == total_samples, "The sum of train and test features should equal the total number of samples"
+    assert len(y_train) + len(y_test) == total_samples, "The sum of train and test targets should equal the total number of samples"
+
+    assert len(X_train) == len(y_train), "X_train and y_train should have the same number of rows"
+
+    assert len(X_test) == len(y_test), "X_test and y_test should have the same number of rows"
